@@ -1,0 +1,18 @@
+Wario ware inspired game about delaying death.
+
+There are 2 things that are inevitable in life,
+and taxes got you years ago, and now
+death is after you too.
+
+30 sec game length
+5 mini games or so
+Game 1: Throw cats at death to distract him
+Game 2: Death try's to hit you with a car
+Game 3: Space invaders syle mini game with bullet hell element
+Game 4: Travel across water by clicking to bail water and keep it within a gauge
+Game 5: Click skull rockets
+Game 6: Arm wrestle death by clicking as fast as posibble
+Game 7: Choose to eat food on a conveyer belt, some of the food is bad
+Final Game: a bunch of these 
+
+In the afterlife you talk to death
