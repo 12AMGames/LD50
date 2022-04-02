@@ -6,7 +6,7 @@ using System;
 
 public class PlayerControls : MonoBehaviour
 {
-    private static Controls controls;
+
 
     [SerializeField] GameObject throwObject = null;
     GameObject instantiatedObject = null;
@@ -18,13 +18,7 @@ public class PlayerControls : MonoBehaviour
     Vector2 mousePos, mouseStartPos, mouseEndPos, mouseLaunchDir;
     MiniGame currentMiniGame;
 
-    private void Awake()
-    {
-        controls = new Controls();
-        controls.normal.MousePos.performed += ctx => mousePos = Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
-        controls.normal.Click.performed += _ => MouseDown();
-        controls.normal.Click.canceled += _ => MouseUp();
-    }
+    
 
     private void OnGameStateChange(GameState state)
     {
@@ -36,6 +30,7 @@ public class PlayerControls : MonoBehaviour
                 controls.Enable();
                 break;
             case GameState.LevelEnd:
+                controls.Disable();
                 break;
         }
     }
@@ -72,7 +67,7 @@ public class PlayerControls : MonoBehaviour
         mouseLaunchDir = mouseStartPos - mouseEndPos;
     }
 
-    private void MouseDown()
+    public void MouseDown()
     {
         mouseDown = true;
         mouseStartPos = mousePos;
@@ -98,18 +93,10 @@ public class PlayerControls : MonoBehaviour
         //}
     }
 
-    private void MouseUp()
+    public virtual void MouseUp()
     {
         mouseEndPos = mousePos;
         mouseDown = false;
-        line.enabled = false;
-        if (realCoolDownTime >= 0)
-            return;
-        realCoolDownTime = coolDownTime;
-        mouseLaunchDir = mouseStartPos - mouseEndPos;
-        instantiatedObject = Instantiate(throwObject, transform.position, Quaternion.Euler(mouseLaunchDir));
-        //instantiatedObject.GetComponent<Rigidbody2D>().AddForce(throwPower * mouseLaunchDir, ForceMode2D.Impulse);
-        instantiatedObject.GetComponent<Rigidbody2D>().velocity = (mouseLaunchDir);
     }
 
     //Math for calculating arc taken from "Trajectory prediction with Unity Physics" by space ape games

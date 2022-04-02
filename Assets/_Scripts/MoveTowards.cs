@@ -28,6 +28,7 @@ public class MoveTowards : MonoBehaviour
                 StartCoroutine("moveTowards");
                 break;
             case GameState.LevelEnd:
+                StopAllCoroutines();
                 break;
         }
     }
