@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeVolume(0);
+        ChangeVolume(1);
     }
 
     public void Play(string name)
@@ -126,7 +126,7 @@ public class AudioManager : MonoBehaviour
     public void ChangeVolume(float whatVolume)
     {
         currentVolume = whatVolume;
-        mainMixer.audioMixer.SetFloat("Main", Mathf.Log10(Mathf.Max(currentVolume, 0.0001f)) * 20f);
+        mainMixer.audioMixer.SetFloat("Main", Mathf.Log10(Mathf.Max(whatVolume, 0.0001f)) * 20f);
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -135,6 +135,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        ChangeVolume(0);
+        ChangeVolume(1f);
+        string[] songs = {"Gnight", "Reapin" };
+        ChangeSong(songs[Random.Range(0, songs.Length)]);
     }
 }

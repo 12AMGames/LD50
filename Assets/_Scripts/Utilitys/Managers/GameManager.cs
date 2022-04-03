@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
                 levelCatchPhraseText.text = Phrases.getRandomWinPhrase();
                 break;
             case GameState.LevelLose:
-                SceneLoaderManager.Instance.gamesComplete--;
+                SceneLoaderManager.Instance.gamesComplete = 0;
                 levelCatchPhraseText.enabled = true;
                 levelCatchPhraseText.text = Phrases.getRandomLosePhrase();
                 break;
@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
             levelCountdownText.text = ((int)timer2).ToString();
             if(gameState == GameState.LevelLose)
             {
+                AudioManager.instance.Play("PlayerDie");
                 yield return new WaitForSeconds(3);
                 SceneLoaderManager.Instance.ChooseRandMiniGame();
             }

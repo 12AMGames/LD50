@@ -19,6 +19,7 @@ public class PlayerJump : PlayerControls
         base.MouseDown();
         if (!Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer))
             return;
+        AudioManager.instance.Play("PlayerJump");
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 

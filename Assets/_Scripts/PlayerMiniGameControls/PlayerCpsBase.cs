@@ -35,6 +35,7 @@ public class PlayerCpsBase : PlayerControls
     public override void MouseUp()
     {
         cps++;
+        AudioManager.instance.Play("PlayerReady");
         StartCoroutine("ShakePlayer");
         base.MouseUp();
     }
