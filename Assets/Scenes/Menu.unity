@@ -805,6 +805,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4700680445332385166, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
+      propertyPath: songs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700680445332385166, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
+      propertyPath: songs.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f7f4a475aa3e6ed43a4f70a1ffaf737a, type: 3}
+    - target: {fileID: 4700680445332385166, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
+      propertyPath: songs.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700680445332385166, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
+      propertyPath: songs.Array.data[2].name
+      value: Sleep
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700680445332385166, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
+      propertyPath: songs.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700680445332385166, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
+      propertyPath: songs.Array.data[2].volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4700680445332385167, guid: 4a2e8dcade668bf4c8df623f4a261e5b, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -136,7 +136,7 @@ public class AudioManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         ChangeVolume(1f);
-        string[] songs = {"Gnight", "Reapin" };
+        string[] songs = {"Gnight", "Reapin", "Sleep" };
         ChangeSong(songs[Random.Range(0, songs.Length)]);
     }
 }
