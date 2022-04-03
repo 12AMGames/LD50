@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MiniGames/Menu.unity
+    path: Assets/Scenes/Menu.unity
     guid: 5f7544ccd95ca0140acb105397c7f347
   - enabled: 1
     path: Assets/Scenes/MiniGames/CatThrowingMiniGame.unity
@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGames/ArmWrestling.unity
     guid: ed65a6965b07dc642867ef4034dfc552
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/DodgeyRoad.unity
+    guid: eacae0be4de1e844b9047f1d53adba3c
+  - enabled: 1
+    path: Assets/Scenes/MiniGames/Showdown.unity
+    guid: f243aa16d38f6d4418296385532f2293
+  - enabled: 1
+    path: Assets/Scenes/GameWin.unity
+    guid: cd24f4d0cd26bac478f48a6fba09fa68
   m_configObjects: {}

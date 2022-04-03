@@ -66,7 +66,15 @@ public class GameManager : MonoBehaviour
                 levelCountdownText.color = Color.grey;
                 levelCatchPhraseText.enabled = false;
                 break;
-            case GameState.LevelEnd:
+            case GameState.LevelWin:
+                SceneLoaderManager.Instance.gamesComplete++;
+                levelCatchPhraseText.enabled = true;
+                levelCatchPhraseText.text = Phrases.getRandomWinPhrase();
+                break;
+            case GameState.LevelLose:
+                SceneLoaderManager.Instance.gamesComplete--;
+                levelCatchPhraseText.enabled = true;
+                levelCatchPhraseText.text = Phrases.getRandomLosePhrase();
                 break;
             default:
                 Debug.LogError("Somethings wrong I can feel it");
@@ -78,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator countDown()
     {
-        float timer = 3f;
+        float timer = 5f;
         while (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -86,16 +94,21 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         UpdateGameState(GameState.Playing);
-        float timer2 = 30f;
+        float timer2 = 20f;
         while (timer2 > 0)
         {
             timer2 -= Time.deltaTime;
             levelCountdownText.text = ((int)timer2).ToString();
+            if(gameState == GameState.LevelLose)
+            {
+                yield return new WaitForSeconds(3);
+                SceneLoaderManager.Instance.ChooseRandMiniGame();
+            }
             yield return null;
         }
-        UpdateGameState(GameState.LevelEnd);
+        UpdateGameState(GameState.LevelWin);
         yield return new WaitForSeconds(3);
-        SceneLoaderManager.Instance.NextScene(2);
+        SceneLoaderManager.Instance.ChooseRandMiniGame();
     }
 }
 
@@ -103,7 +116,8 @@ public enum GameState
 {
     Intro,
     Playing,
-    LevelEnd
+    LevelWin,
+    LevelLose
 }
 
 public enum MiniGame

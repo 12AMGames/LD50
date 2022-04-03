@@ -10,41 +10,12 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public AudioMixerGroup musicMixer;
-    public AudioMixerGroup vfxMixer;
+    public AudioMixerGroup mainMixer;
 
-    public float mainVolume = 1f;
-    public float _musicVolume = 1f;
-    public float MusicVolume
-    {
-        get
-        {
-            return _musicVolume * mainVolume;
-        }
-        set
-        {
-            _musicVolume = value;
-        }
-    }
-    public float _vfxVolume = 1f;
-    public float VfxVolume
-    {
-        get
-        {
-            return _vfxVolume * mainVolume;
-        }
-        set
-        {
-            _vfxVolume = value;
-        }
-    }
-    //SliderSubsciber suber;
-    Slider mainSlider;
-    Slider musicSlider;
-    Slider vfxSlider;
-
+    public float currentVolume = 1f;
     public Sound[] sounds;
     public Sound[] songs;
+    bool volOn;
 
     private void Awake()
     {
@@ -64,7 +35,7 @@ public class AudioManager : MonoBehaviour
         {
             S.source = gameObject.AddComponent<AudioSource>();
             S.source.clip = S.clip;
-            S.source.outputAudioMixerGroup = vfxMixer;
+            S.source.outputAudioMixerGroup = mainMixer;
 
             S.source.volume = S.volume;
             S.source.pitch = S.pitch;
@@ -75,7 +46,7 @@ public class AudioManager : MonoBehaviour
         {
             S.source = gameObject.AddComponent<AudioSource>();
             S.source.clip = S.clip;
-            S.source.outputAudioMixerGroup = musicMixer;
+            S.source.outputAudioMixerGroup = mainMixer;
 
             S.source.volume = S.volume;
             S.source.pitch = S.pitch;
@@ -138,48 +109,24 @@ public class AudioManager : MonoBehaviour
         return isplaying;
     }
 
-    public void ChangeVolume(int whatVolume)
+    public void VolumeToggle()
     {
-        switch (whatVolume)
+        if (volOn)
         {
-            case 0:
-                mainVolume = mainSlider.value;
-                PlayerPrefs.SetFloat("mainVol", mainSlider.value);
-                break;
-            case 1:
-                MusicVolume = musicSlider.value;
-                PlayerPrefs.SetFloat("musicVol", musicSlider.value);
-                break;
-            case 2:
-                VfxVolume = vfxSlider.value;
-                PlayerPrefs.SetFloat("vfxVol", vfxSlider.value);
-                break;
+            volOn = false;
+            ChangeVolume(0);
         }
-
-        //SoundEffects
-        vfxMixer.audioMixer.SetFloat("VfxVol", Mathf.Log10(Mathf.Max(VfxVolume, 0.0001f)) * 20f);
-        //MusicTracks
-        musicMixer.audioMixer.SetFloat("MusicVol", Mathf.Log10(Mathf.Max(MusicVolume, 0.0001f)) * 20f);
-    }
-
-    public void LoadVolumes()
-    {
-        mainSlider.value = PlayerPrefs.GetFloat("mainVol", 1f);
-        musicSlider.value = PlayerPrefs.GetFloat("musicVol", 1f);
-        vfxSlider.value = PlayerPrefs.GetFloat("vfxVol", 1f);
-        for (int i = 0; i <= 3; i++)
+        else
         {
-            ChangeVolume(i - 1);
+            volOn = true;
+            ChangeVolume(1);
         }
     }
 
-    void VolumeInit()
+    public void ChangeVolume(float whatVolume)
     {
-        ////suber = GameObject.FindGameObjectWithTag("UI").GetComponent<SliderSubsciber>();
-        //mainSlider = suber.mainSlider;
-        //musicSlider = suber.musicSlider;
-        //vfxSlider = suber.vfxSlider;
-        LoadVolumes();
+        currentVolume = whatVolume;
+        mainMixer.audioMixer.SetFloat("Main", Mathf.Log10(Mathf.Max(currentVolume, 0.0001f)) * 20f);
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -188,6 +135,6 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        VolumeInit();
+        ChangeVolume(0);
     }
 }
